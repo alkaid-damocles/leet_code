@@ -1,6 +1,7 @@
 package code
 
 import (
+	"fmt"
 	"math"
 	"sort"
 )
@@ -32,11 +33,14 @@ func makeArrayIncreasing(arr1 []int, arr2 []int) int {
 				dp[i][j] = arr1[i-1]
 			}
 			if j > 0 && dp[i-1][j-1] != math.MaxInt {
+				fmt.Println(i, j, dp[i-1][j-1]+1)
 				k := j - 1 + sort.SearchInts(arr2[j-1:], dp[i-1][j-1]+1)
+				fmt.Println(k)
 				if k < m {
 					dp[i][j] = min(dp[i][j], arr2[k])
 				}
 			}
+			fmt.Println(i, j, dp[i][j])
 			if i == n && dp[i][j] != math.MaxInt {
 				return j
 			}
